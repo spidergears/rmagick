@@ -352,6 +352,7 @@ typedef enum _QuantumExpressionOperator
 EXTERN VALUE Module_Magick;
 EXTERN VALUE Class_ImageList;
 EXTERN VALUE Class_Info;
+EXTERN VALUE Class_KernelInfo;
 EXTERN VALUE Class_Draw;
 EXTERN VALUE Class_DrawOptions;
 EXTERN VALUE Class_Image;
@@ -417,6 +418,9 @@ EXTERN VALUE Class_StretchType;
 EXTERN VALUE Class_StyleType;
 EXTERN VALUE Class_WeightType;
 EXTERN VALUE Class_VirtualPixelMethod;
+EXTERN VALUE Class_GeometryFlags;
+EXTERN VALUE Class_MorphologyMethod;
+EXTERN VALUE Class_KernelInfoType;
 
 /**
 *   Commonly-used IDs
@@ -839,6 +843,21 @@ extern VALUE rm_info_new(void);
 extern DisposeType rm_dispose_to_enum(const char *);
 extern GravityType rm_gravity_to_enum(const char *);
 
+// rmkinfo.c
+
+extern VALUE KernelInfo_alloc(VALUE);
+
+extern VALUE KernelInfo_initialize(VALUE, VALUE);
+extern VALUE KernelInfo_zero_nans(VALUE);
+extern VALUE KernelInfo_unity_add(VALUE, VALUE);
+extern VALUE KernelInfo_show(VALUE);
+extern VALUE KernelInfo_scale(VALUE, VALUE, VALUE);
+extern VALUE KernelInfo_scale_geometry(VALUE, VALUE);
+extern VALUE KernelInfo_clone(VALUE);
+
+extern VALUE KernelInfo_builtin(VALUE, VALUE, VALUE);
+
+
 // rmimage.c
 ATTR_WRITER(Image, alpha)
 ATTR_ACCESSOR(Image, background_color)
@@ -973,6 +992,8 @@ extern VALUE Image_contrast(int, VALUE *, VALUE);
 extern VALUE Image_contrast_stretch_channel(int, VALUE *, VALUE);
 extern VALUE Image_convolve(VALUE, VALUE, VALUE);
 extern VALUE Image_convolve_channel(int, VALUE *, VALUE);
+extern VALUE Image_morphology(VALUE, VALUE, VALUE, VALUE);
+extern VALUE Image_morphology_channel(VALUE, VALUE, VALUE, VALUE, VALUE);
 extern VALUE Image_copy(VALUE);
 extern VALUE Image_crop(int, VALUE *, VALUE);
 extern VALUE Image_crop_bang(int, VALUE *, VALUE);
